@@ -10,6 +10,7 @@
  *   pebbles build                构建生产版本
  *   pebbles preview              预览构建结果
  *   pebbles sync                 部署到 GitHub Pages
+ *   pebbles delete [文件名]      删除文章
  */
 
 const fs = require('fs');
@@ -201,6 +202,50 @@ function cmdSync() {
   }
 }
 
+function cmdDelete(target) {
+  const posts = readPosts();
+  if (posts.length === 0) {
+    console.log('没有可删除的文章。');
+    return;
+  }
+
+  // if a filename is given, delete directly
+  if (target) {
+    const found = posts.find(p => p.file === target || p.file.startsWith(target));
+    if (!found) {
+      console.error(`未找到匹配的文章: ${target}`);
+      console.log('用 pebbles list 查看所有文章的文件名。');
+      process.exit(1);
+    }
+    fs.unlinkSync(found.filepath);
+    console.log(`✓ 已删除  ${found.file}`);
+    return;
+  }
+
+  // interactive: numbered list
+  console.log('选择要删除的文章（输入序号）:\n');
+  posts.forEach((p, i) => {
+    const n = String(i + 1).padStart(2, ' ');
+    const label = p.section === 'serif' ? '埋纸地' : '5Pebbles';
+    console.log(`  ${n}. [${label}] ${p.date}  ${p.title}`);
+  });
+  console.log('');
+
+  const readline = require('readline');
+  const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+  rl.question('序号 (1-' + posts.length + '): ', (answer) => {
+    const idx = parseInt(answer, 10) - 1;
+    if (isNaN(idx) || idx < 0 || idx >= posts.length) {
+      console.log('已取消。');
+    } else {
+      const p = posts[idx];
+      fs.unlinkSync(p.filepath);
+      console.log(`✓ 已删除  ${p.file}`);
+    }
+    rl.close();
+  });
+}
+
 // ============================================================
 //  main
 // ============================================================
@@ -218,6 +263,7 @@ function help() {
   pebbles build                构建生产版本
   pebbles preview              预览构建结果
   pebbles sync                 部署到 GitHub Pages
+  pebbles delete [文件名]      删除文章（无参数时交互选择）
 `);
 }
 
@@ -239,6 +285,10 @@ switch (command) {
     break;
   case 'sync':
     cmdSync();
+    break;
+  case 'delete':
+  case 'rm':
+    cmdDelete(process.argv[3]);
     break;
   default:
     help();
