@@ -13,7 +13,7 @@ const { title, date } = Astro.props;
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title} — 埋纸地</title>
-  <link rel="stylesheet" href="/styles/serif.css" />
+  <link rel="stylesheet" href="/pebbles/styles/serif.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoLkbqXLCUZTRY7wEFsYAB0WkNFLK7T3uMYV5" crossorigin="anonymous" />
   <script is:inline>
     (function() {
@@ -26,7 +26,7 @@ const { title, date } = Astro.props;
   <div class="page">
     <nav class="nav">
       <span>
-        <a href="/serif" class="home">埋纸地</a>
+        <a href="/pebbles/serif" class="home">埋纸地</a>
         <button class="theme-toggle" onclick="
           const el = document.documentElement;
           const cur = el.getAttribute('data-theme');
@@ -35,7 +35,7 @@ const { title, date } = Astro.props;
           localStorage.setItem('theme', next);
         ">◐</button>
       </span>
-      <a href="/fp">Five Pebbles</a>
+      <a href="/pebbles/fp">Five Pebbles</a>
     </nav>
 
     <article>
@@ -50,7 +50,7 @@ const { title, date } = Astro.props;
     </article>
 
     <footer>
-      <a href="/serif">埋纸地</a> &nbsp;·&nbsp; <a href="/fp">Five Pebbles</a> &nbsp;·&nbsp; <a href="/">首页</a>
+      <a href="/pebbles/serif">埋纸地</a> &nbsp;·&nbsp; <a href="/pebbles/fp">Five Pebbles</a> &nbsp;·&nbsp; <a href="/pebbles/">首页</a>
     </footer>
   </div>
 </body>

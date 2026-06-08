@@ -12,7 +12,7 @@ posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>埋纸地</title>
-  <link rel="stylesheet" href="/styles/serif.css" />
+  <link rel="stylesheet" href="/pebbles/styles/serif.css" />
   <script is:inline>
     (function() {
       const t = localStorage.getItem('theme');
@@ -24,7 +24,7 @@ posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
   <div class="page">
     <nav class="nav">
       <span>
-        <a href="/serif" class="home">埋纸地</a>
+        <a href="/pebbles/serif" class="home">埋纸地</a>
         <button class="theme-toggle" onclick="
           const el = document.documentElement;
           const cur = el.getAttribute('data-theme');
@@ -33,7 +33,7 @@ posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
           localStorage.setItem('theme', next);
         ">◐</button>
       </span>
-      <a href="/fp">Five Pebbles</a>
+      <a href="/pebbles/fp">Five Pebbles</a>
     </nav>
 
     <ul class="article-list">
@@ -44,7 +44,7 @@ posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
           <PostItem
             title={post.data.title}
             date={post.data.date}
-            href={`/posts/${post.id}`}
+            href={`/pebbles/posts/${post.id}`}
             section="serif"
           />
         ))
@@ -52,7 +52,7 @@ posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
     </ul>
 
     <footer>
-      <a href="/serif">埋纸地</a> &nbsp;·&nbsp; <a href="/fp">Five Pebbles</a> &nbsp;·&nbsp; <a href="/">首页</a>
+      <a href="/pebbles/serif">埋纸地</a> &nbsp;·&nbsp; <a href="/pebbles/fp">Five Pebbles</a> &nbsp;·&nbsp; <a href="/pebbles/">首页</a>
     </footer>
   </div>
 </body>

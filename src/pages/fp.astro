@@ -12,7 +12,7 @@ posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Five Pebbles</title>
-  <link rel="stylesheet" href="/styles/mono.css" />
+  <link rel="stylesheet" href="/pebbles/styles/mono.css" />
   <script is:inline>
     (function() {
       const t = localStorage.getItem('theme');
@@ -24,7 +24,7 @@ posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
   <div class="page">
     <nav class="nav">
       <span>
-        <a href="/fp" class="home">Five Pebbles</a>
+        <a href="/pebbles/fp" class="home">Five Pebbles</a>
         <button class="theme-toggle" onclick="
           const el = document.documentElement;
           const cur = el.getAttribute('data-theme');
@@ -33,7 +33,7 @@ posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
           localStorage.setItem('theme', next);
         ">◐</button>
       </span>
-      <a href="/serif">埋纸地</a>
+      <a href="/pebbles/serif">埋纸地</a>
     </nav>
 
     <ul class="article-list">
@@ -44,7 +44,7 @@ posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
           <PostItem
             title={post.data.title}
             date={post.data.date}
-            href={`/fp/${post.data.date.getFullYear()}/${String(post.data.date.getMonth() + 1).padStart(2, '0')}/${post.data.hex ?? post.id}`}
+            href={`/pebbles/fp/${post.data.date.getFullYear()}/${String(post.data.date.getMonth() + 1).padStart(2, '0')}/${post.data.hex ?? post.id}`}
             section="mono"
             hex={post.data.hex}
           />
@@ -53,7 +53,7 @@ posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
     </ul>
 
     <footer>
-      <a href="/fp">Five Pebbles</a> &nbsp;·&nbsp; <a href="/serif">埋纸地</a> &nbsp;·&nbsp; <a href="/">首页</a>
+      <a href="/pebbles/fp">Five Pebbles</a> &nbsp;·&nbsp; <a href="/pebbles/serif">埋纸地</a> &nbsp;·&nbsp; <a href="/pebbles/">首页</a>
     </footer>
   </div>
 </body>
