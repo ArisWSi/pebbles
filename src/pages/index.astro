@@ -1,7 +1,5 @@
 ---
 import rotations from '../data/rotations'
-
-const chosen = rotations[Math.floor(Math.random() * rotations.length)]
 ---
 
 <!DOCTYPE html>
@@ -28,16 +26,7 @@ const chosen = rotations[Math.floor(Math.random() * rotations.length)]
     localStorage.setItem('theme', next);
   ">◐</button>
 
-  <div class="rotation">
-    {chosen.type === 'code' || chosen.type === 'ascii' ? (
-      <pre>{chosen.content}</pre>
-    ) : (
-      <blockquote>
-        {chosen.content.split('\n').map(line => <p>{line}</p>)}
-      </blockquote>
-    )}
-    {chosen.source && <span class="source">— {chosen.source}</span>}
-  </div>
+  <div class="rotation" id="rotation"></div>
 
   <div class="entrances">
     <a href="/pebbles/serif" class="entrance">
@@ -49,6 +38,26 @@ const chosen = rotations[Math.floor(Math.random() * rotations.length)]
       <span class="hint">技术 · 代码 · 笔记</span>
     </a>
   </div>
+
+  <script is:inline>
+    const rotations = {JSON.stringify(rotations)};
+    const r = rotations[Math.floor(Math.random() * rotations.length)];
+    const el = document.getElementById('rotation');
+    let html = '';
+    if (r.type === 'code' || r.type === 'ascii') {
+      html = '<pre>' + r.content.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</pre>';
+    } else {
+      html = '<blockquote>';
+      r.content.split('\n').forEach(function(line) {
+        html += '<p>' + line + '</p>';
+      });
+      html += '</blockquote>';
+    }
+    if (r.source) {
+      html += '<span class="source">— ' + r.source + '</span>';
+    }
+    el.innerHTML = html;
+  </script>
 
 </body>
 </html>
