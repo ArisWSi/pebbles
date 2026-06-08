@@ -9,13 +9,22 @@
     const next = cur === 'dark' ? 'light' : 'dark';
     el.setAttribute('data-theme', next);
     localStorage.setItem('theme', next);
-  ">◐</button> <div class="rotation"> <pre>    .-&quot;&quot;-.     .-&quot;&quot;-.
-   /      \   /      \
-  |        | |        |
-  |  .--.  | |  .--.  |
-  | (    ) | | (    ) |
-   \      /   \      /
-    &#39;-..-&#39;     &#39;-..-&#39;
-
-     two pebbles
-     looking at each other</pre> <span class="source">— ascii art</span> </div> <div class="entrances"> <a href="/pebbles/serif" class="entrance"> <span class="name">埋纸地</span> <span class="hint">随笔 · 读书 · 生活</span> </a> <a href="/pebbles/fp" class="entrance fp"> <span class="name">Five Pebbles</span> <span class="hint">技术 · 代码 · 笔记</span> </a> </div> </body></html>
+  ">◐</button> <div class="rotation" id="rotation"></div> <div class="entrances"> <a href="/pebbles/serif" class="entrance"> <span class="name">埋纸地</span> <span class="hint">随笔 · 读书 · 生活</span> </a> <a href="/pebbles/fp" class="entrance fp"> <span class="name">Five Pebbles</span> <span class="hint">技术 · 代码 · 笔记</span> </a> </div> <script>
+    const rotations = {JSON.stringify(rotations)};
+    const r = rotations[Math.floor(Math.random() * rotations.length)];
+    const el = document.getElementById('rotation');
+    let html = '';
+    if (r.type === 'code' || r.type === 'ascii') {
+      html = '<pre>' + r.content.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</pre>';
+    } else {
+      html = '<blockquote>';
+      r.content.split('\n').forEach(function(line) {
+        html += '<p>' + line + '</p>';
+      });
+      html += '</blockquote>';
+    }
+    if (r.source) {
+      html += '<span class="source">— ' + r.source + '</span>';
+    }
+    el.innerHTML = html;
+  </script> </body> </html>
