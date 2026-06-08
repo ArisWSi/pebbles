@@ -9,11 +9,12 @@
     const next = cur === 'dark' ? 'light' : 'dark';
     el.setAttribute('data-theme', next);
     localStorage.setItem('theme', next);
-  ">◐</button> <div class="rotation" id="rotation"></div> <div class="entrances"> <a href="/pebbles/serif" class="entrance"> <span class="name">埋纸地</span> <span class="hint">随笔 · 读书 · 生活</span> </a> <a href="/pebbles/fp" class="entrance fp"> <span class="name">Five Pebbles</span> <span class="hint">技术 · 代码 · 笔记</span> </a> </div> <script>
-    const rotations = {JSON.stringify(rotations)};
-    const r = rotations[Math.floor(Math.random() * rotations.length)];
-    const el = document.getElementById('rotation');
-    let html = '';
+  ">◐</button> <div class="rotation" id="rotation"></div> <div class="entrances"> <a href="/pebbles/serif" class="entrance"> <span class="name">埋纸地</span> <span class="hint">随笔 · 读书 · 生活</span> </a> <a href="/pebbles/fp" class="entrance fp"> <span class="name">Five Pebbles</span> <span class="hint">技术 · 代码 · 笔记</span> </a> </div> <script type="application/json" id="rotations-data">[{"type":"poem","content":"你不需要理解这一切。\n你只需要知道——\n每一场雨都会停。","source":"Rain World"},{"type":"quote","content":"The cycles are countless, but each one is a chance.","source":"Five Pebbles"},{"type":"code","content":"fn main() {\n    println!(\"hello, world\");\n    // what else is there to say?\n}","source":"a rust program"},{"type":"ascii","content":"    .-\"\"-.     .-\"\"-.\n   /      \\   /      \\\n  |        | |        |\n  |  .--.  | |  .--.  |\n  | (    ) | | (    ) |\n   \\      /   \\      /\n    '-..-'     '-..-'\n\n     two pebbles\n     looking at each other","source":"ascii art"},{"type":"dialogue","content":"— 为什么要写博客？\n— 因为纸埋在地里会烂，卵石扔进雨里还能捡起来。\n— ……什么意思？\n— 我也不知道。","source":"一段对话"}]</script> <script>
+    var elData = document.getElementById('rotations-data');
+    var rotations = JSON.parse(elData.textContent);
+    var r = rotations[Math.floor(Math.random() * rotations.length)];
+    var el = document.getElementById('rotation');
+    var html = '';
     if (r.type === 'code' || r.type === 'ascii') {
       html = '<pre>' + r.content.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</pre>';
     } else {

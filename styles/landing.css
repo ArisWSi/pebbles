@@ -6,10 +6,10 @@
 
 :root,
 :root[data-theme="light"] {
-  --bg:        #f7f5f0;
+  --bg:        #c6c2b7;
   --text:      #1a1a1a;
   --quote:     #444;
-  --source:    #aaa;
+  --source:    #646464;
   --entrance:  #1a1a1a;
   --serif-hover: #8b4513;
   --fp-hover:    #3d5a3c;

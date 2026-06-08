@@ -5,7 +5,7 @@
 
 :root,
 :root[data-theme="light"] {
-  --bg:          #faf7f2;
+  --bg:          #c6c2b7;
   --bg-code:     #f3efe8;
   --text:        #1a1a1a;
   --secondary:   #8c8279;
@@ -21,16 +21,16 @@
   --width:       840px;
 
   /* Shiki (light) */
-  --shiki-color-background: var(--bg-code);
-  --shiki-color-text:       #24292f;
-  --shiki-token-constant:   #0550ae;
-  --shiki-token-string:     #0a3069;
-  --shiki-token-comment:    #6e7781;
-  --shiki-token-keyword:    #cf222e;
-  --shiki-token-function:   #8250df;
-  --shiki-token-string-expression: #0a3069;
-  --shiki-token-punctuation: #24292f;
-  --shiki-token-link:       #0969da;
+  --astro-code-background:        var(--bg-code);
+  --astro-code-foreground:        #24292f;
+  --astro-code-token-constant:    #0550ae;
+  --astro-code-token-string:      #0a3069;
+  --astro-code-token-comment:     #6e7781;
+  --astro-code-token-keyword:     #cf222e;
+  --astro-code-token-function:    #8250df;
+  --astro-code-token-parameter:   #24292f;
+  --astro-code-token-punctuation: #24292f;
+  --astro-code-token-link:        #0969da;
 }
 
 :root[data-theme="dark"] {
@@ -44,16 +44,16 @@
   --quote:       #a09888;
   --border:      #3a3530;
 
-  --shiki-color-background: var(--bg-code);
-  --shiki-color-text:       #c9d1d9;
-  --shiki-token-constant:   #79c0ff;
-  --shiki-token-string:     #a5d6ff;
-  --shiki-token-comment:    #8b949e;
-  --shiki-token-keyword:    #ff7b72;
-  --shiki-token-function:   #d2a8ff;
-  --shiki-token-string-expression: #a5d6ff;
-  --shiki-token-punctuation: #c9d1d9;
-  --shiki-token-link:       #58a6ff;
+  --astro-code-background:        var(--bg-code);
+  --astro-code-foreground:        #c9d1d9;
+  --astro-code-token-constant:    #79c0ff;
+  --astro-code-token-string:      #a5d6ff;
+  --astro-code-token-comment:     #8b949e;
+  --astro-code-token-keyword:     #ff7b72;
+  --astro-code-token-function:    #d2a8ff;
+  --astro-code-token-parameter:   #c9d1d9;
+  --astro-code-token-punctuation: #c9d1d9;
+  --astro-code-token-link:        #58a6ff;
 }
 
 /* system preference fallback */
@@ -69,16 +69,16 @@
     --quote:       #a09888;
     --border:      #3a3530;
 
-    --shiki-color-background: var(--bg-code);
-    --shiki-color-text:       #c9d1d9;
-    --shiki-token-constant:   #79c0ff;
-    --shiki-token-string:     #a5d6ff;
-    --shiki-token-comment:    #8b949e;
-    --shiki-token-keyword:    #ff7b72;
-    --shiki-token-function:   #d2a8ff;
-    --shiki-token-string-expression: #a5d6ff;
-    --shiki-token-punctuation: #c9d1d9;
-    --shiki-token-link:       #58a6ff;
+    --astro-code-background:        var(--bg-code);
+    --astro-code-foreground:        #c9d1d9;
+    --astro-code-token-constant:    #79c0ff;
+    --astro-code-token-string:      #a5d6ff;
+    --astro-code-token-comment:     #8b949e;
+    --astro-code-token-keyword:     #ff7b72;
+    --astro-code-token-function:    #d2a8ff;
+    --astro-code-token-parameter:   #c9d1d9;
+    --astro-code-token-punctuation: #c9d1d9;
+    --astro-code-token-link:        #58a6ff;
   }
 }
 
@@ -265,7 +265,7 @@ article .date {
 
 /* --- Code --- */
 .content pre {
-  background: var(--shiki-color-background);
+  background: var(--astro-code-background);
   padding: 24px 28px;
   margin: 24px 0;
   overflow-x: auto;
