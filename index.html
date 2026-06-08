@@ -1,0 +1,21 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>埋纸地 & Five Pebbles</title><link rel="stylesheet" href="/styles/landing.css"><script>
+    (function() {
+      const t = localStorage.getItem('theme');
+      if (t) { document.documentElement.setAttribute('data-theme', t); }
+    })();
+  </script></head> <body> <button class="theme-toggle" onclick="
+    const el = document.documentElement;
+    const cur = el.getAttribute('data-theme');
+    const next = cur === 'dark' ? 'light' : 'dark';
+    el.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+  ">◐</button> <div class="rotation"> <pre>    .-&quot;&quot;-.     .-&quot;&quot;-.
+   /      \   /      \
+  |        | |        |
+  |  .--.  | |  .--.  |
+  | (    ) | | (    ) |
+   \      /   \      /
+    &#39;-..-&#39;     &#39;-..-&#39;
+
+     two pebbles
+     looking at each other</pre> <span class="source">— ascii art</span> </div> <div class="entrances"> <a href="/serif" class="entrance"> <span class="name">埋纸地</span> <span class="hint">随笔 · 读书 · 生活</span> </a> <a href="/fp" class="entrance fp"> <span class="name">Five Pebbles</span> <span class="hint">技术 · 代码 · 笔记</span> </a> </div> </body></html>
