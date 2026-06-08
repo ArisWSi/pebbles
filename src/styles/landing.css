@@ -1,0 +1,173 @@
+/* ========================================
+   首页 — 轮换文本 + 入口
+   ======================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root,
+:root[data-theme="light"] {
+  --bg:        #f7f5f0;
+  --text:      #1a1a1a;
+  --quote:     #444;
+  --source:    #aaa;
+  --entrance:  #1a1a1a;
+  --serif-hover: #8b4513;
+  --fp-hover:    #3d5a3c;
+  --fp-hover-alt:#c15b3d;
+}
+
+:root[data-theme="dark"] {
+  --bg:        #1e1c18;
+  --text:      #dad5cb;
+  --quote:     #b0a99d;
+  --source:    #7a7368;
+  --entrance:  #dad5cb;
+  --serif-hover: #c9a87c;
+  --fp-hover:    #5d8c5d;
+  --fp-hover-alt:#d4735a;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --bg:        #1e1c18;
+    --text:      #dad5cb;
+    --quote:     #b0a99d;
+    --source:    #7a7368;
+    --entrance:  #dad5cb;
+    --serif-hover: #c9a87c;
+    --fp-hover:    #5d8c5d;
+    --fp-hover-alt:#d4735a;
+  }
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 17px;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+body {
+  font-family: 'JetBrains Mono', 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', Georgia, 'Times New Roman', serif;
+  line-height: 1.9;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* --- Theme toggle --- */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
+  font-size: 14px;
+  background: none;
+  border: none;
+  color: var(--source);
+  cursor: pointer;
+  padding: 4px;
+  transition: color 0.15s;
+}
+.theme-toggle:hover {
+  color: var(--serif-hover);
+}
+
+/* --- Rotation text --- */
+.rotation {
+  width: 100%;
+  max-width: 1000px;
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.rotation pre {
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', Consolas, 'Courier New', monospace;
+  font-size: 1.1em;
+  line-height: 1.5;
+  text-align: left;
+  display: inline-block;
+  margin: 0 auto;
+}
+
+.rotation blockquote {
+  font-size: 1.35em;
+  color: var(--quote);
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.rotation p { margin-bottom: 0.8em; font-size: inherit; }
+
+.rotation .source {
+  display: block;
+  margin-top: 16px;
+  font-family: 'SF Mono', 'Fira Code', Consolas, 'Courier New', monospace;
+  font-size: 12px;
+  color: var(--source);
+  font-style: normal;
+}
+
+/* --- Entrances --- */
+.entrances {
+  display: flex;
+  gap: 48px;
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', Consolas, 'Courier New', monospace;
+  font-size: 14px;
+}
+
+.entrance {
+  text-decoration: none;
+  color: var(--entrance);
+  padding: 8px 0;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+  letter-spacing: 0.3px;
+}
+
+.entrance:hover {
+  color: #c15b3d;
+  border-color: #c15b3d;
+}
+
+.entrance.fp:hover {
+  color: #c15b3d;
+  border-color: #c15b3d;
+}
+
+.entrance .name { display: block; }
+.entrance .hint {
+  display: block;
+  font-size: 11px;
+  color: var(--source);
+  letter-spacing: 0.2px;
+  margin-top: 2px;
+}
+
+/* ========================================
+   Mobile
+   ======================================== */
+@media (max-width: 640px) {
+  html { font-size: 16px; }
+  body { padding: 32px 20px; }
+  .rotation { margin-bottom: 36px; }
+  .rotation pre {
+    font-size: 11px;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  .entrances { gap: 32px; font-size: 13px; }
+}

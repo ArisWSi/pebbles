@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSS 三样式预览</title>
+
+<!-- ============ serif.css ============ -->
+<style id="serif-style">
+  /* 埋纸地 — A1 刻本 */
+  .preview-serif {
+    --bg:          #faf7f2;
+    --bg-code:     #f3efe8;
+    --text:        #1a1a1a;
+    --secondary:   #8c8279;
+    --accent:      #8b4513;
+    --accent-alt:  #c9a87c;
+    --border:      #e5dfd5;
+    --font-serif:  'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', Georgia, 'Times New Roman', serif;
+    --font-mono:   'SF Mono', 'Fira Code', 'Cascadia Code', Consolas, 'Courier New', monospace;
+    --font-size:   18px;
+    --line-height: 2.0;
+    --width:       680px;
+
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-serif);
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+    min-height: 100%;
+    padding-bottom: 40px;
+  }
+
+  .preview-serif .page {
+    max-width: var(--width);
+    margin: 0 auto;
+    padding: min(5vw, 50px);
+  }
+
+  .preview-serif .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 60px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--secondary);
+  }
+  .preview-serif .nav a {
+    color: var(--secondary);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+  .preview-serif .nav a:hover { color: var(--accent); border-color: var(--accent-alt); }
+  .preview-serif .nav .home { font-weight: 600; color: var(--accent); }
+
+  .preview-serif .article-list { list-style: none; }
+  .preview-serif .article-list li { margin-bottom: 28px; }
+  .preview-serif .article-list a { display: block; text-decoration: none; color: var(--text); }
+  .preview-serif .article-list a:hover .title { color: var(--accent); }
+  .preview-serif .article-list .title { font-size: 1.1em; font-weight: 700; margin-bottom: 2px; }
+  .preview-serif .article-list .meta { font-family: var(--font-mono); font-size: 13px; color: var(--secondary); }
+
+  .preview-serif article header { margin-bottom: 44px; }
+  .preview-serif article h1 { font-size: 1.45em; font-weight: 700; line-height: 1.45; letter-spacing: 0.03em; margin-bottom: 12px; }
+  .preview-serif article .date { font-family: var(--font-mono); font-size: 13px; color: var(--secondary); }
+
+  .preview-serif .content h2 { font-size: 1.2em; font-weight: 700; margin: 44px 0 16px; }
+  .preview-serif .content h3 { font-size: 1.05em; font-weight: 700; margin: 36px 0 12px; }
+  .preview-serif .content p { margin-bottom: 1.5em; text-align: justify; }
+  .preview-serif .content a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-alt); }
+  .preview-serif .content a:hover { color: #5c2d0a; border-color: #5c2d0a; }
+  .preview-serif .content strong { font-weight: 700; }
+  .preview-serif .content em { font-style: italic; }
+  .preview-serif .content blockquote {
+    margin: 24px 0;
+    padding: 6px 0 6px 20px;
+    border-left: 3px solid var(--accent-alt);
+    color: #6b5e53;
+    font-style: italic;
+  }
+  .preview-serif .content blockquote p { margin-bottom: 0.6em; }
+  .preview-serif .content ul { margin: 0 0 1.5em 1.5em; }
+  .preview-serif .content li { margin-bottom: 0.4em; }
+  .preview-serif .content pre {
+    background: var(--bg-code);
+    padding: 24px 28px;
+    margin: 24px 0;
+    overflow-x: auto;
+    border-left: 3px solid var(--accent-alt);
+    line-height: 1.7;
+    font-family: var(--font-mono);
+    font-size: 13px;
+  }
+  .preview-serif .content code { font-family: var(--font-mono); }
+  .preview-serif .content :not(pre) > code {
+    font-size: 0.88em;
+    background: var(--bg-code);
+    border: 1px solid var(--border);
+    padding: 1px 6px;
+    border-radius: 3px;
+  }
+  .preview-serif .content pre code { background: none; border: none; padding: 0; border-radius: 0; }
+  .preview-serif .content hr { border: none; height: 2px; background: var(--accent-alt); width: 80px; margin: 40px 0; opacity: 0.5; }
+  .preview-serif footer {
+    margin-top: 64px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--secondary);
+  }
+  .preview-serif footer a { color: var(--secondary); text-decoration: none; }
+  .preview-serif footer a:hover { color: var(--accent); }
+  .preview-serif .badge {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--secondary);
+    border: 1px solid var(--border);
+    padding: 1px 8px;
+    margin-right: 10px;
+  }
+</style>
+
+<!-- ============ mono.css ============ -->
+<style id="mono-style">
+  /* Five Pebbles — B1 终端 */
+  .preview-mono {
+    --bg-page:     #f0f0f0;
+    --bg-content:  #fafaf9;
+    --bg-code:     #fcfcfc;
+    --text:        #1a1a1a;
+    --secondary:   #666666;
+    --accent:      #246978;
+    --accent-alt:  #dc9542;
+    --border:      #ccc;
+    --code-border: #eaeaea;
+    --font:        'SF Mono', 'Fira Code', 'Cascadia Code', Consolas, 'Courier New', monospace;
+    --font-size:   14px;
+    --line-height: 2.0;
+    --letter-spacing: 0.25px;
+    --width:       760px;
+
+    background: var(--bg-page);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+    letter-spacing: var(--letter-spacing);
+    min-height: 100%;
+    padding-bottom: 40px;
+  }
+
+  .preview-mono .page {
+    max-width: var(--width);
+    margin: 0 auto;
+    padding: min(5vw, 50px);
+    background: var(--bg-content);
+    min-height: 100vh;
+  }
+
+  .preview-mono .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 50px;
+    font-size: 13px;
+    color: var(--secondary);
+  }
+  .preview-mono .nav a {
+    color: var(--secondary);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+  .preview-mono .nav a:hover { color: var(--accent); border-color: var(--accent); }
+  .preview-mono .nav .home { color: var(--accent-alt); }
+
+  .preview-mono .article-list { list-style: none; }
+  .preview-mono .article-list li { margin-bottom: 22px; }
+  .preview-mono .article-list a { text-decoration: none; color: var(--text); display: block; }
+  .preview-mono .article-list a:hover .title { color: var(--accent-alt); }
+  .preview-mono .article-list .hex { color: var(--secondary); margin-right: 12px; }
+  .preview-mono .article-list .title { transition: color 0.15s; }
+  .preview-mono .article-list .meta { color: var(--secondary); font-size: 12px; margin-left: 2px; }
+
+  .preview-mono article header { margin-bottom: 40px; }
+  .preview-mono article h1 { font-weight: 400; font-size: 1.15em; line-height: 1.6; letter-spacing: 0.3px; margin-bottom: 8px; }
+  .preview-mono article .date { font-size: 12px; color: var(--secondary); }
+
+  .preview-mono .content h2 { font-weight: 400; font-size: 1em; margin: 40px 0 14px; color: #333; }
+  .preview-mono .content h3 { font-weight: 400; font-size: 0.95em; margin: 32px 0 10px; color: #444; }
+  .preview-mono .content p { margin-bottom: 1.4em; text-align: justify; }
+  .preview-mono .content a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent); }
+  .preview-mono .content a:hover { color: var(--accent-alt); border-color: var(--accent-alt); }
+  .preview-mono .content strong { font-weight: 700; }
+  .preview-mono .content em { font-style: italic; }
+  .preview-mono .content blockquote {
+    margin: 24px 0;
+    padding: 4px 0 4px 16px;
+    border-left: 3px solid var(--border);
+    color: var(--secondary);
+    font-style: normal;
+  }
+  .preview-mono .content blockquote p { margin-bottom: 0.5em; }
+  .preview-mono .content ul { margin: 0 0 1.4em 2em; }
+  .preview-mono .content li { margin-bottom: 0.3em; }
+  .preview-mono .content pre {
+    background: var(--bg-code);
+    padding: 16px 20px;
+    margin: 24px 0;
+    overflow-x: auto;
+    border: 3px solid var(--border);
+    line-height: 1.45;
+    font-size: 11px;
+  }
+  .preview-mono .content code { font-family: var(--font); }
+  .preview-mono .content :not(pre) > code {
+    font-size: 12px;
+    background: var(--bg-code);
+    border: 2px solid var(--code-border);
+    padding: 0px 5px;
+    border-radius: 0;
+  }
+  .preview-mono .content pre code { background: none; border: none; padding: 0; }
+  .preview-mono .content pre .comment  { color: #679b7c; }
+  .preview-mono .content pre .keyword  { font-weight: bold; color: #0080c0; }
+  .preview-mono .content pre .string   { color: #808080; }
+  .preview-mono .content pre .number   { color: #ff8000; }
+  .preview-mono .content pre .function { color: #800000; }
+  .preview-mono .content hr { border: none; height: 3px; background: var(--accent-alt); margin: 40px 0; }
+  .preview-mono footer {
+    margin-top: 56px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--secondary);
+  }
+  .preview-mono footer a { color: var(--secondary); text-decoration: none; }
+  .preview-mono footer a:hover { color: var(--accent-alt); }
+  .preview-mono .badge {
+    font-size: 11px;
+    color: var(--accent-alt);
+    border: 1px solid var(--accent-alt);
+    padding: 1px 8px;
+    margin-right: 8px;
+  }
+</style>
+
+<!-- ============ landing.css ============ -->
+<style id="landing-style">
+  /* 首页 — 轮换文本 + 入口 */
+  .preview-landing {
+    background: #f7f5f0;
+    color: #1a1a1a;
+    font-family: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', Georgia, 'Times New Roman', serif;
+    font-size: 17px;
+    line-height: 1.9;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
+  }
+  .preview-landing .rotation {
+    max-width: 600px;
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .preview-landing .rotation pre {
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', Consolas, 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.5;
+    text-align: left;
+    display: inline-block;
+  }
+  .preview-landing .rotation blockquote {
+    font-style: italic;
+    color: #444;
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+  .preview-landing .rotation p { margin-bottom: 0.8em; }
+  .preview-landing .rotation .source {
+    display: block;
+    margin-top: 16px;
+    font-family: 'SF Mono', 'Fira Code', Consolas, 'Courier New', monospace;
+    font-size: 12px;
+    color: #aaa;
+  }
+  .preview-landing .entrances {
+    display: flex;
+    gap: 48px;
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', Consolas, 'Courier New', monospace;
+    font-size: 14px;
+  }
+  .preview-landing .entrance {
+    text-decoration: none;
+    color: #1a1a1a;
+    padding: 8px 0;
+    border-bottom: 2px solid transparent;
+    letter-spacing: 0.3px;
+  }
+  .preview-landing .entrance:hover { color: #8b4513; border-color: #8b4513; }
+  .preview-landing .entrance.fp:hover { color: #246978; border-color: #dc9542; }
+  .preview-landing .entrance .name { display: block; }
+  .preview-landing .entrance .hint { display: block; font-size: 11px; color: #aaa; letter-spacing: 0.2px; margin-top: 2px; }
+</style>
+
+<!-- ============ Layout ============ -->
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, "Microsoft YaHei", sans-serif;
+    background: #e0ddd6;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 0;
+    max-width: 860px;
+    margin: 32px auto 0;
+    padding: 0 16px;
+  }
+  .tabs button {
+    font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    padding: 10px 20px;
+    border: none;
+    background: #ddd9d2;
+    color: #999;
+    cursor: pointer;
+    transition: 0.15s;
+  }
+  .tabs button:first-child { border-radius: 3px 0 0 0; }
+  .tabs button:last-child { border-radius: 0 3px 0 0; }
+  .tabs button.active {
+    background: var(--tab-bg, #faf7f2);
+    color: #1a1a1a;
+  }
+  #tab-serif.active { --tab-bg: #faf7f2; }
+  #tab-mono.active { --tab-bg: #f0f0f0; }
+  #tab-landing.active { --tab-bg: #f7f5f0; }
+
+  .panel {
+    display: none;
+    max-width: 860px;
+    margin: 0 auto 40px;
+    border-radius: 0 3px 3px 3px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .panel.active { display: block; }
+</style>
+</head>
+<body>
+
+<div class="tabs">
+  <button id="tab-serif" class="active" onclick="switchTab('serif')">埋纸地 · 刻本</button>
+  <button id="tab-mono" onclick="switchTab('mono')">Five Pebbles · 终端</button>
+  <button id="tab-landing" onclick="switchTab('landing')">首页 · 入口</button>
+</div>
+
+<!-- ==================== 埋纸地 ==================== -->
+<div id="panel-serif" class="panel active">
+<div class="preview-serif">
+
+<div class="page">
+
+  <!-- Nav -->
+  <nav class="nav">
+    <a href="#" class="home">埋纸地</a>
+    <a href="#">RSS</a>
+  </nav>
+
+  <!-- Article list -->
+  <ul class="article-list">
+    <li>
+      <a href="#">
+        <div class="title">体面的人不扔垃圾</div>
+        <div class="meta">2026-06-09</div>
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <div class="title">雨世界的建筑语言</div>
+        <div class="meta">2026-05-22</div>
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <div class="title">在 Croydon 逛街</div>
+        <div class="meta">2026-04-15</div>
+      </a>
+    </li>
+  </ul>
+
+  <hr style="border:none;height:2px;background:var(--accent-alt);width:80px;margin:48px 0;opacity:0.5;">
+
+  <!-- Article detail -->
+  <article>
+    <header>
+      <h1>体面的人不扔垃圾</h1>
+      <div class="date">2026-06-09</div>
+    </header>
+
+    <div class="content">
+      <p>前几天我站在 Mont-Royal 和 St-Denis 的十字路口等红灯，旁边站着一个穿西装的商务男士。就在绿灯亮起那一刻，他伸手去包里掏东西，一盒薄荷糖掉了出来。大约三十颗白色小糖丸像弹珠一样滚满了马路。</p>
+
+      <p>这让我想起一段反复浮现的记忆。那时我大概十二岁，和我的朋友还有他妈妈在 Croydon 逛街。她给我们一人买了一块巧克力。我吃完后，<strong>悄悄试着把包装纸丢在地上</strong>。我不知道自己为什么那样做——我以前从来没有乱扔过垃圾。也许是因为看见别人这样做过，而我又跟不太熟的人在一起，于是想试试看——想知道那是什么感觉。</p>
+
+      <blockquote>
+        <p>「其实乱扔垃圾是好事，不然那些靠捡垃圾为生的人就要失业了。」</p>
+      </blockquote>
+
+      <p>那句话让我的朋友爆笑——他站到了我这边，开始用这话逗他妈妈。我完全翻转了局势——朋友不再觉得我做了蠢事，而是觉得我做了聪明事——<strong>现在轮到他妈妈成了被嘲笑的对象</strong>。那是我第一次意识到，为一些不真实的事情辩护，既可以很好玩，也可以让人印象深刻。</p>
+
+      <h2>八十亿人的星球</h2>
+
+      <p>在这个八十亿人的星球上生活，最疯狂的事情之一就是：如果你有一个麻烦，在某些情况下你基本可以把这个麻烦像挥棒球棍一样甩进人群，让它砸在某个倒霉路人的头上。对你来说，麻烦等于消失了。对那个被砸中的人来说——麻烦像是凭空出现的。多有趣啊！</p>
+
+<pre><code><span class="comment">// 一个随手的代码注释</span>
+<span class="keyword">fn</span> <span class="function">should_pick_up</span>(litter: &amp;<span class="type">Litter</span>) -> <span class="type">bool</span> {
+    <span class="keyword">match</span> litter.owner {
+        <span class="type">Owner</span>::Me => <span class="type">true</span>,
+        <span class="type">Owner</span>::SomeoneElse => {
+            <span class="comment">// 但那个"别人"也可能是另一个我</span>
+            <span class="type">true</span>
+        }
+    }
+}</code></pre>
+
+      <p>作为机器学习从业者，我喜欢把内心的那个小声音想象成<code>local gradient signal</code>。它工作的层面差不多就是：「我不喜欢街上满是垃圾」「垃圾只有人丢了才存在」「我是人」「所以我不应该丢垃圾」。这很好——虽然这个世界到处有人大喊大叫地告诉你全局最优解在哪——但他们碰不到你的那个小声音。而只要你专注那个小声音——迈出小步，尽量让你经过的地方比你发现时更好一点——在广袤的多维世界里，你确实感觉能往正确的方向移动。</p>
+
+      <hr>
+
+      <p><small>原文选自 Daniel Holden 博客，翻译为中文演示排版效果。</small></p>
+    </div>
+  </article>
+
+  <footer>
+    <a href="#">埋纸地</a> &nbsp;·&nbsp; <a href="#">RSS</a>
+  </footer>
+
+</div>
+</div>
+</div>
+
+<!-- ==================== Five Pebbles ==================== -->
+<div id="panel-mono" class="panel">
+<div class="preview-mono">
+
+<div class="page">
+
+  <!-- Nav -->
+  <nav class="nav">
+    <a href="#" class="home">Five Pebbles</a>
+    <span>迭代器 #04</span>
+    <a href="#">RSS</a>
+  </nav>
+
+  <!-- Article list -->
+  <ul class="article-list">
+    <li>
+      <a href="#">
+        <span class="hex">0x81a9</span>
+        <span class="title">Respectable people don't Litter</span>
+        <span class="meta">2026-06-09</span>
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <span class="hex">0x23ed</span>
+        <span class="title">Inertial Easing 的数学原理</span>
+        <span class="meta">2026-05-22</span>
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <span class="hex">0xd095</span>
+        <span class="title">Fitting Code Driven Displacement</span>
+        <span class="meta">2026-04-15</span>
+      </a>
+    </li>
+  </ul>
+
+  <hr style="border:none;height:3px;background:var(--accent-alt);margin:48px 0;">
+
+  <!-- Article detail -->
+  <article>
+    <header>
+      <h1>体面的人不扔垃圾</h1>
+      <div class="date">0x81a9 &nbsp;·&nbsp; 2026-06-09</div>
+    </header>
+
+    <div class="content">
+      <p>前几天我站在 Mont-Royal 和 St-Denis 的十字路口等红灯，旁边站着一个穿西装的商务男士。就在绿灯亮起那一刻，他伸手去包里掏东西，一盒薄荷糖掉了出来。大约三十颗白色小糖丸像弹珠一样滚满了马路。</p>
+
+      <p>这让我想起一段反复浮现的记忆。那时我大概十二岁，和我的朋友还有他妈妈在 Croydon 逛街。她给我们一人买了一块巧克力。我吃完后，<strong>悄悄试着把包装纸丢在地上</strong>。我不知道自己为什么那样做——我以前从来没有乱扔过垃圾。也许是因为看见别人这样做过，而我又跟不太熟的人在一起，于是想试试看——想知道那是什么感觉。</p>
+
+      <blockquote>
+        <p>「其实乱扔垃圾是好事，不然那些靠捡垃圾为生的人就要失业了。」</p>
+      </blockquote>
+
+      <p>那句话让我的朋友爆笑——他站到了我这边，开始用这话逗他妈妈。我完全翻转了局势——朋友不再觉得我做了蠢事，而是觉得我做了聪明事——<strong>现在轮到他妈妈成了被嘲笑的对象</strong>。那是我第一次意识到，为一些不真实的事情辩护，既可以很好玩，也可以让人印象深刻。</p>
+
+      <h2>八十亿人的星球</h2>
+
+      <p>在这个八十亿人的星球上生活，最疯狂的事情之一就是：如果你有一个麻烦，在某些情况下你基本可以把这个麻烦像挥棒球棍一样甩进人群，让它砸在某个倒霉路人的头上。对你来说，麻烦等于消失了。对那个被砸中的人来说——麻烦像是凭空出现的。多有趣啊！</p>
+
+<pre><code><span class="comment">// 一个随手的代码注释</span>
+<span class="keyword">fn</span> <span class="function">should_pick_up</span>(litter: &amp;<span class="type">Litter</span>) -> <span class="type">bool</span> {
+    <span class="keyword">match</span> litter.owner {
+        <span class="type">Owner</span>::Me => <span class="type">true</span>,
+        <span class="type">Owner</span>::SomeoneElse => {
+            <span class="comment">// 但那个"别人"也可能是另一个我</span>
+            <span class="type">true</span>
+        }
+    }
+}</code></pre>
+
+      <p>作为机器学习从业者，我喜欢把内心的那个小声音想象成<code>local gradient signal</code>。它工作的层面差不多就是：「我不喜欢街上满是垃圾」「垃圾只有人丢了才存在」「我是人」「所以我不应该丢垃圾」。这很好——虽然这个世界到处有人大喊大叫地告诉你全局最优解在哪——但他们碰不到你的那个小声音。而只要你专注那个小声音——迈出小步，尽量让你经过的地方比你发现时更好一点——在广袤的多维世界里，你确实感觉能往正确的方向移动。</p>
+
+      <hr>
+
+      <p><small>原文选自 Daniel Holden 博客，翻译为中文演示排版效果。</small></p>
+    </div>
+  </article>
+
+  <footer>
+    <a href="#">Five Pebbles</a> &nbsp;·&nbsp; <a href="#">RSS</a> &nbsp;·&nbsp; <a href="#">埋纸地</a>
+  </footer>
+
+</div>
+</div>
+</div>
+
+<!-- ==================== 首页 ==================== -->
+<div id="panel-landing" class="panel">
+<div class="preview-landing">
+
+  <div class="rotation">
+    <blockquote>
+      <p>你不需要理解这一切。<br>你只需要知道——<br>每一场雨都会停。</p>
+    </blockquote>
+    <span class="source">— Rain World</span>
+  </div>
+
+  <div class="entrances">
+    <a href="#" class="entrance">
+      <span class="name">埋纸地</span>
+      <span class="hint">随笔 · 读书 · 生活</span>
+    </a>
+    <a href="#" class="entrance fp">
+      <span class="name">Five Pebbles</span>
+      <span class="hint">技术 · 代码 · 笔记</span>
+    </a>
+  </div>
+
+</div>
+</div>
+
+<script>
+  function switchTab(name) {
+    document.querySelectorAll('.tabs button').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    document.getElementById('panel-' + name).classList.add('active');
+  }
+</script>
+
+</body>
+</html>

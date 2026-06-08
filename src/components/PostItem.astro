@@ -1,0 +1,27 @@
+---
+export interface Props {
+  title: string
+  date: Date
+  href: string
+  section: 'serif' | 'mono'
+  hex?: string
+}
+
+const { title, date, href, section, hex } = Astro.props
+const formattedDate = date.toLocaleDateString('zh-CN', {
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+})
+---
+
+<li>
+  <a href={href}>
+    {section === 'mono' && hex && <span class="hex">0x{hex}</span>}
+    <span class="title">{title}</span>
+    {section === 'mono' && <span class="meta">{formattedDate}</span>}
+    {section === 'serif' && (
+      <div class="meta">{formattedDate}</div>
+    )}
+  </a>
+</li>

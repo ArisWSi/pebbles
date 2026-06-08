@@ -1,0 +1,60 @@
+---
+import { getCollection } from 'astro:content'
+import PostItem from '../components/PostItem.astro'
+
+const posts = await getCollection('posts', ({ data }) => data.section === 'mono')
+posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+---
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Five Pebbles</title>
+  <link rel="stylesheet" href="/styles/mono.css" />
+  <script is:inline>
+    (function() {
+      const t = localStorage.getItem('theme');
+      if (t) { document.documentElement.setAttribute('data-theme', t); }
+    })();
+  </script>
+</head>
+<body>
+  <div class="page">
+    <nav class="nav">
+      <span>
+        <a href="/fp" class="home">Five Pebbles</a>
+        <button class="theme-toggle" onclick="
+          const el = document.documentElement;
+          const cur = el.getAttribute('data-theme');
+          const next = cur === 'dark' ? 'light' : 'dark';
+          el.setAttribute('data-theme', next);
+          localStorage.setItem('theme', next);
+        ">◐</button>
+      </span>
+      <a href="/serif">埋纸地</a>
+    </nav>
+
+    <ul class="article-list">
+      {posts.length === 0 ? (
+        <li style="color: var(--secondary);">还没有文章。</li>
+      ) : (
+        posts.map(post => (
+          <PostItem
+            title={post.data.title}
+            date={post.data.date}
+            href={`/fp/${post.data.date.getFullYear()}/${String(post.data.date.getMonth() + 1).padStart(2, '0')}/${post.data.hex ?? post.id}`}
+            section="mono"
+            hex={post.data.hex}
+          />
+        ))
+      )}
+    </ul>
+
+    <footer>
+      <a href="/fp">Five Pebbles</a> &nbsp;·&nbsp; <a href="/serif">埋纸地</a> &nbsp;·&nbsp; <a href="/">首页</a>
+    </footer>
+  </div>
+</body>
+</html>

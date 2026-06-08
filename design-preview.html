@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>排版方案细化对比</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #e8e8e8;
+    color: #1a1a1a;
+    padding: 48px 24px;
+    font-family: -apple-system, "Microsoft YaHei", sans-serif;
+  }
+
+  hgroup {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  hgroup h1 {
+    font-size: 26px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+  }
+  hgroup p {
+    color: #777;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  /* --- Layout --- */
+  .section-label {
+    max-width: 1280px;
+    margin: 0 auto 16px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #999;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #ccc;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1280px;
+    margin: 0 auto 48px;
+  }
+  @media (max-width: 1100px) {
+    .grid { grid-template-columns: 1fr; max-width: 680px; }
+  }
+
+  /* --- Shared content base --- */
+  .content .meta {
+    margin-bottom: 28px;
+  }
+  .content .meta .date {
+    opacity: 0.55;
+  }
+  .content .meta .tags {
+    opacity: 0.35;
+  }
+  .content h3 {
+    margin-bottom: 28px;
+  }
+  .content p {
+    margin-bottom: 1.4em;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .content a {
+    text-decoration: none;
+    transition: 0.15s;
+  }
+  .content em {
+    font-style: italic;
+  }
+  .content strong {
+    font-weight: 700;
+  }
+  .content pre {
+    margin: 24px 0;
+    overflow-x: auto;
+  }
+  .content p code {
+    font-size: 0.88em;
+    padding: 1px 6px;
+  }
+  .content blockquote {
+    margin: 22px 0;
+  }
+  .content hr {
+    border: none;
+    margin: 36px 0;
+  }
+  .content .footnote {
+    margin-top: 36px;
+    padding-top: 16px;
+  }
+
+  /* ============================================= */
+  /*  A1 — 刻本 · 温润书卷                         */
+  /* ============================================= */
+  .a1 {
+    background: #faf7f2;
+    border: 1px solid #e5dfd5;
+    padding: 44px 44px;
+  }
+  .a1 .content {
+    font-family: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', Georgia, 'Times New Roman', serif;
+    font-size: 18px;
+    line-height: 2.0;
+  }
+  .a1 .content .meta {
+    font-family: 'SF Mono', 'Fira Code', Consolas, 'Courier New', monospace;
+    font-size: 13px;
+    color: #8c8279;
+  }
+  .a1 .content h3 {
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.45;
+    letter-spacing: 0.03em;
+  }
+  .a1 .content a { color: #8b4513; border-bottom: 1px solid #c9a87c; }
+  .a1 .content a:hover { color: #5c2d0a; border-color: #5c2d0a; }
+  .a1 .content blockquote {
+    padding: 6px 0 6px 20px;
+    border-left: 3px solid #c9a87c;
+    color: #6b5e53;
+    font-style: italic;
+  }
+  .a1 .content pre {
+    background: #f3efe8;
+    padding: 24px 28px;
+    border-left: 3px solid #c9a87c;
+    line-height: 1.7;
+    font-family: 'SF Mono', 'Fira Code', Consolas, 'Courier New', monospace;
+    font-size: 13px;
+  }
+  .a1 .content p code {
+    background: #f3efe8;
+    border: 1px solid #e5dfd5;
+    border-radius: 3px;
+  }
+  .a1 .content hr {
+    height: 2px;
+    background: #c9a87c;
+    width: 80px;
+    opacity: 0.5;
+  }
+  .a1 .content .footnote {
+    color: #8c8279;
+    font-size: 0.85em;
+    border-top: 1px solid #e5dfd5;
+  }
+
+  /* ============================================= */
+  /*  A2 — 杂志 · 犀利现代衬线                      */
+  /* ============================================= */
+  .a2 {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    padding: 44px 44px;
+  }
+  .a2 .content {
+    font-family: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'Times New Roman', serif;
+    font-size: 17px;
+    line-height: 1.85;
+  }
+  .a2 .content .meta {
+    font-family: 'SF Mono', 'Fira Code', Consolas, 'Courier New', monospace;
+    font-size: 12px;
+    color: #888;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .a2 .content h3 {
+    font-size: 24px;
+    font-weight: 900;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+  }
+  .a2 .content a { color: #000; border-bottom: 2px solid #ff6b35; }
+  .a2 .content a:hover { color: #ff6b35; }
+  .a2 .content blockquote {
+    padding: 10px 0 10px 22px;
+    border-left: 4px solid #000;
+    color: #444;
+    font-family: inherit;
+    font-style: normal;
+    letter-spacing: -0.005em;
+  }
+  .a2 .content pre {
+    background: #fafafa;
+    padding: 22px 26px;
+    border: 1px solid #e5e5e5;
+    line-height: 1.6;
+    font-family: 'SF Mono', 'Fira Code', Consolas, 'Courier New', monospace;
+    font-size: 12.5px;
+  }
+  .a2 .content p code {
+    background: #fafafa;
+    border: 1px solid #e5e5e5;
+    border-radius: 2px;
+  }
+  .a2 .content hr {
+    height: 4px;
+    background: #000;
+    width: 40px;
+  }
+  .a2 .content .footnote {
+    color: #999;
+    font-size: 0.8em;
+    border-top: 1px solid #e5e5e5;
+  }
+
+  /* ============================================= */
+  /*  A3 — 留白 · 空灵极简衬线                      */
+  /* ============================================= */
+  .a3 {
+    background: #fdfdfd;
+    border: none;
+    padding: 52px 56px;
+    box-shadow: 0 0 0 1px #eee;
+  }
+  .a3 .content {
+    font-family: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', Georgia, serif;
+    font-size: 17px;
+    line-height: 2.1;
+    letter-spacing: 0.015em;
+  }
+  .a3 .content .meta {
+    font-family: inherit;
+    font-size: 14px;
+    color: #bbb;
+    letter-spacing: 0.04em;
+  }
+  .a3 .content h3 {
+    font-size: 22px;
+    font-weight: 300;
+    line-height: 1.6;
+    letter-spacing: 0.06em;
+    color: #333;
+  }
+  .a3 .content a { color: #333; border-bottom: 1px solid #ccc; }
+  .a3 .content a:hover { color: #000; border-color: #000; }
+  .a3 .content blockquote {
+    padding: 14px 0 14px 24px;
+    border-left: 1px solid #ddd;
+    color: #999;
+    font-style: normal;
+    letter-spacing: 0.03em;
+  }
+  .a3 .content pre {
+    background: #fafafa;
+    padding: 28px 30px;
+    border: none;
+    line-height: 1.7;
+    font-family: 'SF Mono', 'Fira Code', Consolas, 'Courier New', monospace;
+    font-size: 12.5px;
+    color: #555;
+  }
+  .a3 .content p code {
+    background: transparent;
+    border: none;
+    color: #888;
+  }
+  .a3 .content hr {
+    height: 1px;
+    background: #eee;
+    width: 100%;
+  }
+  .a3 .content .footnote {
+    color: #ccc;
+    font-size: 0.82em;
+    border-top: 1px solid #f0f0f0;
+    letter-spacing: 0.03em;
+  }
+
+  /* ============================================= */
+  /*  B1 — 终端 · Holden 直系                       */
+  /* ============================================= */
+  .b1 {
+    background: #f0f0f0;
+    border: 3px solid #1E687A;
+    padding: 0;
+    box-shadow: inset 0 0 0 3px #dc9542;
+  }
+  .b1-inner {
+    padding: 38px 44px;
+  }
+  .b1 .content {
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', Consolas, 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 2.0;
+    letter-spacing: 0.25px;
+  }
+  .b1 .content .meta {
+    font-family: inherit;
+    font-size: 12px;
+    color: #777;
+  }
+  .b1 .content h3 {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.7;
+    letter-spacing: 0.3px;
+  }
+  .b1 .content a { color: #246978; border-bottom: 1px solid #246978; }
+  .b1 .content a:hover { color: #dc9542; border-color: #dc9542; }
+  .b1 .content blockquote {
+    padding: 4px 0 4px 16px;
+    border-left: 3px solid #ccc;
+    color: #666;
+    font-style: normal;
+  }
+  .b1 .content pre {
+    background: #fcfcfc;
+    padding: 16px 20px;
+    border: 3px solid #ccc;
+    line-height: 1.45;
+    font-family: 'SF Mono', 'Fira Code', Consolas, 'Courier New', monospace;
+    font-size: 11px;
+  }
+  .b1 .content p code {
+    background: #fcfcfc;
+    border: 2px solid #eaeaea;
+    border-radius: 0;
+    font-size: 12px;
+  }
+  .b1 .content hr {
+    height: 3px;
+    background: #dc9542;
+    width: 100%;
+  }
+  .b1 .content .footnote {
+    color: #999;
+    font-size: 0.85em;
+    border-top: none;
+  }
+
+  /* ============================================= */
+  /*  B2 — 打字机 · 温润机械风                       */
+  /* ============================================= */
+  .b2 {
+    background: #fdfaf6;
+    border: 1px solid #e0d8cc;
+    padding: 44px 44px;
+    box-shadow: 2px 2px 0 #e8e0d4;
+  }
+  .b2 .content {
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', Consolas, 'Courier New', monospace;
+    font-size: 14.5px;
+    line-height: 1.95;
+    letter-spacing: 0.2px;
+    color: #2a2218;
+  }
+  .b2 .content .meta {
+    font-family: inherit;
+    font-size: 12px;
+    color: #a09880;
+    letter-spacing: 0.08em;
+  }
+  .b2 .content h3 {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.55;
+    letter-spacing: 0.15px;
+    text-transform: uppercase;
+  }
+  .b2 .content a { color: #8b4513; border-bottom: 1px dotted #8b4513; }
+  .b2 .content a:hover { color: #5c2d0a; border-bottom-style: solid; }
+  .b2 .content blockquote {
+    padding: 6px 0 6px 18px;
+    border-left: 2px solid #c9b896;
+    color: #8c8070;
+    font-style: normal;
+  }
+  .b2 .content pre {
+    background: #faf7f2;
+    padding: 20px 24px;
+    border: 1px solid #e0d8cc;
+    line-height: 1.5;
+    font-family: 'SF Mono', 'Fira Code', Consolas, 'Courier New', monospace;
+    font-size: 12px;
+  }
+  .b2 .content p code {
+    background: #faf7f2;
+    border: 1px solid #e0d8cc;
+    border-radius: 2px;
+  }
+  .b2 .content hr {
+    height: 1px;
+    background: repeating-linear-gradient(90deg, #c9b896 0, #c9b896 4px, transparent 4px, transparent 8px);
+    width: 100%;
+  }
+  .b2 .content .footnote {
+    color: #a09880;
+    font-size: 0.82em;
+    border-top: 1px dashed #e0d8cc;
+  }
+
+  /* ============================================= */
+  /*  B3 — 档案 · 冷峻结构笔记                       */
+  /* ============================================= */
+  .b3 {
+    background: #f8f8f8;
+    border: 1px solid #d0d0d0;
+    padding: 0;
+  }
+  .b3-header {
+    background: #2a2a2a;
+    color: #c0c0c0;
+    padding: 10px 20px;
+    font-family: 'SF Mono', 'Fira Code', Consolas, 'Courier New', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    display: flex;
+    justify-content: space-between;
+  }
+  .b3-header span:last-child {
+    color: #dc9542;
+  }
+  .b3-body {
+    padding: 38px 44px;
+  }
+  .b3 .content {
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', Consolas, 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.95;
+    letter-spacing: 0.2px;
+  }
+  .b3 .content .meta {
+    font-family: inherit;
+    font-size: 11px;
+    color: #999;
+    letter-spacing: 0.08em;
+  }
+  .b3 .content .meta span {
+    background: #2a2a2a;
+    color: #dc9542;
+    padding: 2px 8px;
+    margin-right: 6px;
+  }
+  .b3 .content h3 {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.6;
+    letter-spacing: 0.25px;
+  }
+  .b3 .content a { color: #1a6b80; border-bottom: 1px solid #1a6b80; }
+  .b3 .content a:hover { color: #dc9542; border-color: #dc9542; }
+  .b3 .content blockquote {
+    padding: 4px 0 4px 16px;
+    border-left: 2px solid #bbb;
+    color: #777;
+    font-style: normal;
+  }
+  .b3 .content pre {
+    background: #f0f0f0;
+    padding: 18px 22px;
+    border-left: 3px solid #555;
+    line-height: 1.5;
+    font-family: 'SF Mono', 'Fira Code', Consolas, 'Courier New', monospace;
+    font-size: 11.5px;
+  }
+  .b3 .content p code {
+    background: #f0f0f0;
+    border-radius: 0;
+    padding: 2px 6px;
+  }
+  .b3 .content hr {
+    height: 1px;
+    background: #d0d0d0;
+    width: 100%;
+  }
+  .b3 .content .footnote {
+    color: #aaa;
+    font-size: 0.8em;
+    border-top: 1px solid #e0e0e0;
+  }
+
+  /* --- Labels --- */
+  .card-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 6px;
+    font-family: -apple-system, "Microsoft YaHei", sans-serif;
+  }
+  .card-sub {
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 22px;
+    line-height: 1.5;
+    font-family: -apple-system, "Microsoft YaHei", sans-serif;
+  }
+</style>
+</head>
+<body>
+
+<hgroup>
+  <h1>六种排版风格</h1>
+  <p>同一个段落，六种气质。找那个让你「想在这里写东西」的感觉。</p>
+</hgroup>
+
+<!-- ==================== A 系列 ==================== -->
+<div class="section-label">A 系列 — 衬线 / 书卷气</div>
+<div class="grid">
+
+  <!-- A1 刻本 -->
+  <div class="a1">
+    <div class="card-label" style="color:#8b4513;">A1 · 刻本</div>
+    <div class="card-sub">暖纸色 · 大字号 · 像翻阅一本排印考究的书</div>
+    <div class="content">
+      <div class="meta"><span class="date">2026-06-09</span></div>
+      <h3>体面的人不扔垃圾</h3>
+
+      <p>前几天我站在 Mont-Royal 和 St-Denis 的十字路口等红灯，旁边站着一个穿西装的商务男士。就在绿灯亮起那一刻，他伸手去包里掏东西，一盒薄荷糖掉了出来。大约三十颗白色小糖丸像弹珠一样滚满了马路。</p>
+
+      <p>这让我想起一段反复浮现的记忆。那时我大概十二岁，和我的朋友还有他妈妈在 Croydon 逛街。她给我们一人买了一块巧克力。我吃完后，<strong>悄悄试着把包装纸丢在地上</strong>。</p>
+
+      <blockquote>
+        <p>「其实乱扔垃圾是好事，不然那些靠捡垃圾为生的人就要失业了。」</p>
+      </blockquote>
+
+      <p>那句话让我的朋友爆笑——他站到了我这边，开始用这话逗他妈妈。我完全翻转了局势——朋友不再觉得我做了蠢事，而是觉得我做了聪明事。</p>
+
+<pre><code><span style="color:#679b7c;">// 一个随手的代码注释</span>
+<span style="color:#0080c0;font-weight:bold;">fn</span> <span style="color:#443657;font-weight:bold;">should_pick_up</span>(litter: &amp;<span style="color:#800000;font-weight:bold;">Litter</span>) -> <span style="color:#800000;font-weight:bold;">bool</span> {
+    <span style="color:#0080c0;font-weight:bold;">match</span> litter.owner {
+        <span style="color:#800000;font-weight:bold;">Owner</span>::Me => <span style="color:#0080c0;font-weight:bold;">true</span>,
+        <span style="color:#800000;font-weight:bold;">Owner</span>::SomeoneElse => <span style="color:#0080c0;font-weight:bold;">true</span>,
+    }
+}</code></pre>
+
+      <p>在这个八十亿人的星球上生活，最疯狂的事情之一就是：如果你有一个麻烦，在某些情况下你基本可以把这个麻烦像挥棒球棍一样甩进人群。</p>
+
+      <hr>
+      <p class="footnote">* 原文选自 Daniel Holden 博客，翻译为中文演示。</p>
+    </div>
+  </div>
+
+  <!-- A2 杂志 -->
+  <div class="a2">
+    <div class="card-label" style="color:#ff6b35;">A2 · 杂志</div>
+    <div class="card-sub">纯白底 · 粗衬线标题 · 像一本独立文学杂志</div>
+    <div class="content">
+      <div class="meta"><span class="date">2026-06-09</span></div>
+      <h3>体面的人不扔垃圾</h3>
+
+      <p>前几天我站在 Mont-Royal 和 St-Denis 的十字路口等红灯，旁边站着一个穿西装的商务男士。就在绿灯亮起那一刻，他伸手去包里掏东西，一盒薄荷糖掉了出来。大约三十颗白色小糖丸像弹珠一样滚满了马路。</p>
+
+      <p>这让我想起一段反复浮现的记忆。那时我大概十二岁，和我的朋友还有他妈妈在 Croydon 逛街。她给我们一人买了一块巧克力。我吃完后，<strong>悄悄试着把包装纸丢在地上</strong>。</p>
+
+      <blockquote>
+        <p>「其实乱扔垃圾是好事，不然那些靠捡垃圾为生的人就要失业了。」</p>
+      </blockquote>
+
+      <p>那句话让我的朋友爆笑——他站到了我这边，开始用这话逗他妈妈。我完全翻转了局势——朋友不再觉得我做了蠢事，而是觉得我做了聪明事。</p>
+
+<pre><code><span style="color:#679b7c;">// 一个随手的代码注释</span>
+<span style="color:#0080c0;font-weight:bold;">fn</span> <span style="color:#443657;font-weight:bold;">should_pick_up</span>(litter: &amp;<span style="color:#800000;font-weight:bold;">Litter</span>) -> <span style="color:#800000;font-weight:bold;">bool</span> {
+    <span style="color:#0080c0;font-weight:bold;">match</span> litter.owner {
+        <span style="color:#800000;font-weight:bold;">Owner</span>::Me => <span style="color:#0080c0;font-weight:bold;">true</span>,
+        <span style="color:#800000;font-weight:bold;">Owner</span>::SomeoneElse => <span style="color:#0080c0;font-weight:bold;">true</span>,
+    }
+}</code></pre>
+
+      <p>在这个八十亿人的星球上生活，最疯狂的事情之一就是：如果你有一个麻烦，在某些情况下你基本可以把这个麻烦像挥棒球棍一样甩进人群。</p>
+
+      <hr>
+      <p class="footnote">* 原文选自 Daniel Holden 博客，翻译为中文演示。</p>
+    </div>
+  </div>
+
+  <!-- A3 留白 -->
+  <div class="a3">
+    <div class="card-label" style="color:#999;">A3 · 留白</div>
+    <div class="card-sub">极简 · 轻声细语 · 让文字在呼吸中自己说话</div>
+    <div class="content">
+      <div class="meta"><span class="date">2026-06-09</span></div>
+      <h3>体面的人不扔垃圾</h3>
+
+      <p>前几天我站在 Mont-Royal 和 St-Denis 的十字路口等红灯，旁边站着一个穿西装的商务男士。就在绿灯亮起那一刻，他伸手去包里掏东西，一盒薄荷糖掉了出来。大约三十颗白色小糖丸像弹珠一样滚满了马路。</p>
+
+      <p>这让我想起一段反复浮现的记忆。那时我大概十二岁，和我的朋友还有他妈妈在 Croydon 逛街。她给我们一人买了一块巧克力。我吃完后，<strong>悄悄试着把包装纸丢在地上</strong>。</p>
+
+      <blockquote>
+        <p>「其实乱扔垃圾是好事，不然那些靠捡垃圾为生的人就要失业了。」</p>
+      </blockquote>
+
+      <p>那句话让我的朋友爆笑——他站到了我这边，开始用这话逗他妈妈。我完全翻转了局势——朋友不再觉得我做了蠢事，而是觉得我做了聪明事。</p>
+
+<pre><code><span style="color:#aaa;">// 一个随手的代码注释</span>
+<span style="color:#777;">fn should_pick_up(litter: &amp;Litter) -> bool {
+    match litter.owner {
+        Owner::Me => true,
+        Owner::SomeoneElse => true,
+    }
+}</span></code></pre>
+
+      <p>在这个八十亿人的星球上生活，最疯狂的事情之一就是：如果你有一个麻烦，在某些情况下你基本可以把这个麻烦像挥棒球棍一样甩进人群。</p>
+
+      <hr>
+      <p class="footnote">* 原文选自 Daniel Holden 博客，翻译为中文演示。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== B 系列 ==================== -->
+<div class="section-label">B 系列 — 等宽 / 极客笔记本</div>
+<div class="grid">
+
+  <!-- B1 终端 -->
+  <div class="b1">
+    <div class="card-label" style="color:#1E687A;">B1 · 终端</div>
+    <div class="card-sub">双层画框 · 等宽全站 · Holden 博客的直接演化</div>
+    <div class="b1-inner">
+      <div class="content">
+        <div class="meta"><span class="date">0x81a9</span> &nbsp; <span class="tags">2026-06-09</span></div>
+        <h3>体面的人不扔垃圾</h3>
+
+        <p>前几天我站在 Mont-Royal 和 St-Denis 的十字路口等红灯，旁边站着一个穿西装的商务男士。就在绿灯亮起那一刻，他伸手去包里掏东西，一盒薄荷糖掉了出来。大约三十颗白色小糖丸像弹珠一样滚满了马路。</p>
+
+        <p>这让我想起一段反复浮现的记忆。那时我大概十二岁，和我的朋友还有他妈妈在 Croydon 逛街。她给我们一人买了一块巧克力。我吃完后，<strong>悄悄试着把包装纸丢在地上</strong>。</p>
+
+        <blockquote>
+          <p>「其实乱扔垃圾是好事，不然那些靠捡垃圾为生的人就要失业了。」</p>
+        </blockquote>
+
+        <p>那句话让我的朋友爆笑——他站到了我这边，开始用这话逗他妈妈。我完全翻转了局势——朋友不再觉得我做了蠢事，而是觉得我做了聪明事。</p>
+
+<pre><code><span style="color:#679b7c;">// 一个随手的代码注释</span>
+<span style="color:#0080c0;font-weight:bold;">fn</span> <span style="color:#443657;font-weight:bold;">should_pick_up</span>(litter: &amp;<span style="color:#800000;font-weight:bold;">Litter</span>) -> <span style="color:#800000;font-weight:bold;">bool</span> {
+    <span style="color:#0080c0;font-weight:bold;">match</span> litter.owner {
+        <span style="color:#800000;font-weight:bold;">Owner</span>::Me => <span style="color:#0080c0;font-weight:bold;">true</span>,
+        <span style="color:#800000;font-weight:bold;">Owner</span>::SomeoneElse => <span style="color:#0080c0;font-weight:bold;">true</span>,
+    }
+}</code></pre>
+
+        <p>在这个八十亿人的星球上生活，最疯狂的事情之一就是：如果你有一个麻烦，在某些情况下你基本可以把这个麻烦像挥棒球棍一样甩进人群。</p>
+
+        <hr>
+        <p class="footnote">* 原文选自 Daniel Holden 博客，翻译为中文演示。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- B2 打字机 -->
+  <div class="b2">
+    <div class="card-label" style="color:#8b4513;">B2 · 打字机</div>
+    <div class="card-sub">暖纸色 · 虚线分割 · 像老式打字机敲出的手稿</div>
+    <div class="content">
+      <div class="meta"><span class="date">2026-06-09</span> · <span class="tags">#essay</span></div>
+      <h3>体面的人不扔垃圾</h3>
+
+      <p>前几天我站在 Mont-Royal 和 St-Denis 的十字路口等红灯，旁边站着一个穿西装的商务男士。就在绿灯亮起那一刻，他伸手去包里掏东西，一盒薄荷糖掉了出来。大约三十颗白色小糖丸像弹珠一样滚满了马路。</p>
+
+      <p>这让我想起一段反复浮现的记忆。那时我大概十二岁，和我的朋友还有他妈妈在 Croydon 逛街。她给我们一人买了一块巧克力。我吃完后，<strong>悄悄试着把包装纸丢在地上</strong>。</p>
+
+      <blockquote>
+        <p>「其实乱扔垃圾是好事，不然那些靠捡垃圾为生的人就要失业了。」</p>
+      </blockquote>
+
+      <p>那句话让我的朋友爆笑——他站到了我这边，开始用这话逗他妈妈。我完全翻转了局势——朋友不再觉得我做了蠢事，而是觉得我做了聪明事。</p>
+
+<pre><code><span style="color:#679b7c;">// 一个随手的代码注释</span>
+<span style="color:#0080c0;font-weight:bold;">fn</span> <span style="color:#443657;font-weight:bold;">should_pick_up</span>(litter: &amp;<span style="color:#800000;font-weight:bold;">Litter</span>) -> <span style="color:#800000;font-weight:bold;">bool</span> {
+    <span style="color:#0080c0;font-weight:bold;">match</span> litter.owner {
+        <span style="color:#800000;font-weight:bold;">Owner</span>::Me => <span style="color:#0080c0;font-weight:bold;">true</span>,
+        <span style="color:#800000;font-weight:bold;">Owner</span>::SomeoneElse => <span style="color:#0080c0;font-weight:bold;">true</span>,
+    }
+}</code></pre>
+
+      <p>在这个八十亿人的星球上生活，最疯狂的事情之一就是：如果你有一个麻烦，在某些情况下你基本可以把这个麻烦像挥棒球棍一样甩进人群。</p>
+
+      <hr>
+      <p class="footnote">* 原文选自 Daniel Holden 博客，翻译为中文演示。</p>
+    </div>
+  </div>
+
+  <!-- B3 档案 -->
+  <div class="b3">
+    <div class="card-label" style="color:#555;">B3 · 档案</div>
+    <div class="card-sub">结构化 · 冷峻 · 像一份归档的技术文档</div>
+    <div class="b3-header">
+      <span>~/notes/essays/litter.md</span>
+      <span>± 1.2k words</span>
+    </div>
+    <div class="b3-body">
+      <div class="content">
+        <div class="meta"><span>0x81a9</span> &nbsp; <span class="date">2026-06-09</span></div>
+        <h3>体面的人不扔垃圾</h3>
+
+        <p>前几天我站在 Mont-Royal 和 St-Denis 的十字路口等红灯，旁边站着一个穿西装的商务男士。就在绿灯亮起那一刻，他伸手去包里掏东西，一盒薄荷糖掉了出来。大约三十颗白色小糖丸像弹珠一样滚满了马路。</p>
+
+        <p>这让我想起一段反复浮现的记忆。那时我大概十二岁，和我的朋友还有他妈妈在 Croydon 逛街。她给我们一人买了一块巧克力。我吃完后，<strong>悄悄试着把包装纸丢在地上</strong>。</p>
+
+        <blockquote>
+          <p>「其实乱扔垃圾是好事，不然那些靠捡垃圾为生的人就要失业了。」</p>
+        </blockquote>
+
+        <p>那句话让我的朋友爆笑——他站到了我这边，开始用这话逗他妈妈。我完全翻转了局势——朋友不再觉得我做了蠢事，而是觉得我做了聪明事。</p>
+
+<pre><code><span style="color:#679b7c;">// 一个随手的代码注释</span>
+<span style="color:#0080c0;font-weight:bold;">fn</span> <span style="color:#443657;font-weight:bold;">should_pick_up</span>(litter: &amp;<span style="color:#800000;font-weight:bold;">Litter</span>) -> <span style="color:#800000;font-weight:bold;">bool</span> {
+    <span style="color:#0080c0;font-weight:bold;">match</span> litter.owner {
+        <span style="color:#800000;font-weight:bold;">Owner</span>::Me => <span style="color:#0080c0;font-weight:bold;">true</span>,
+        <span style="color:#800000;font-weight:bold;">Owner</span>::SomeoneElse => <span style="color:#0080c0;font-weight:bold;">true</span>,
+    }
+}</code></pre>
+
+        <p>在这个八十亿人的星球上生活，最疯狂的事情之一就是：如果你有一个麻烦，在某些情况下你基本可以把这个麻烦像挥棒球棍一样甩进人群。</p>
+
+        <hr>
+        <p class="footnote">* 原文选自 Daniel Holden 博客，翻译为中文演示。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

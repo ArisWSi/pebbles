@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content'
+import MonoLayout from '../../layouts/MonoLayout.astro'
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => data.section === 'mono')
+  return posts.map(post => {
+    const d = post.data.date
+    const hex = post.data.hex ?? post.id
+    return {
+      params: {
+        path: `${d.getFullYear()}/${String(d.getMonth() + 1).padStart(2, '0')}/${hex}`,
+      },
+      props: { post },
+    }
+  })
+}
+
+const { post } = Astro.props
+const { title, date, hex } = post.data
+const { Content } = await post.render()
+---
+
+<MonoLayout title={title} date={date} hex={hex}>
+  <Content />
+</MonoLayout>

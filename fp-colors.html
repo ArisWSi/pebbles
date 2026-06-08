@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Five Pebbles · 墨绿 + 赭石 + 锈红</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #ddd;
+    font-family: -apple-system, "Microsoft YaHei", sans-serif;
+    padding: 32px 16px;
+  }
+
+  hgroup {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  hgroup h1 { font-size: 24px; font-weight: 500; margin-bottom: 4px; }
+  hgroup p  { color: #888; font-size: 13px; }
+  .swatches {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 16px 0;
+    align-items: center;
+    font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
+    font-size: 11px;
+    color: #888;
+  }
+  .swatches span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .swatches i {
+    display: inline-block;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.1);
+  }
+
+  /* ==================== Layout ==================== */
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  @media (max-width: 900px) { .layout { grid-template-columns: 1fr; max-width: 680px; } }
+
+  /* ==================== Card base ==================== */
+  .card {
+    --font: 'SF Mono', 'Fira Code', 'Cascadia Code', Consolas, 'Courier New', monospace;
+    font-family: var(--font);
+    font-size: 13px;
+    line-height: 1.85;
+    letter-spacing: 0.25px;
+    background: var(--bg-page);
+    color: var(--text);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .card .label {
+    background: #2a2a2a;
+    padding: 8px 16px;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: #999;
+    display: flex;
+    justify-content: space-between;
+  }
+  .card .label strong { color: #ddd; }
+  .card-inner {
+    background: var(--bg-content);
+    padding: 28px 32px;
+  }
+
+  .card .nav {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    font-size: 12px;
+    color: var(--secondary);
+  }
+  .card .nav .home { color: var(--accent-alt); }
+
+  .card .list { list-style: none; margin-bottom: 28px; }
+  .card .list li { margin-bottom: 10px; }
+  .card .list .hex { color: var(--secondary); margin-right: 10px; }
+
+  .card h3 { font-weight: 400; font-size: 1em; margin-bottom: 6px; letter-spacing: 0.3px; }
+  .card .date { font-size: 11px; color: var(--secondary); }
+
+  .card .content p { margin-bottom: 1.2em; text-align: justify; }
+  .card .content strong { font-weight: 700; }
+  .card .content em { font-style: italic; }
+
+  .card .content a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent);
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .card .content a:hover {
+    color: var(--rust);
+    border-color: var(--rust);
+  }
+
+  .card .content blockquote {
+    margin: 18px 0;
+    padding: 2px 0 2px 14px;
+    border-left: 3px solid var(--border-strong);
+    color: var(--secondary);
+    font-style: normal;
+  }
+  .card .content blockquote p { margin-bottom: 0.4em; }
+
+  .card .content pre {
+    background: var(--bg-code);
+    padding: 14px 18px;
+    margin: 18px 0;
+    border: 2px solid var(--border-strong);
+    line-height: 1.45;
+    font-size: 10px;
+    overflow-x: auto;
+  }
+  .card .content :not(pre) > code {
+    background: var(--bg-code);
+    border: 1.5px solid var(--code-border);
+    padding: 0 5px;
+    border-radius: 0;
+    font-size: 11px;
+  }
+  .card .content pre code { background: none; border: none; padding: 0; font-size: 10px; }
+
+  /* syntax */
+  .card .content pre .comment  { color: #679b7c; }
+  .card .content pre .keyword  { font-weight: bold; color: #0080c0; }
+  .card .content pre .string   { color: #808080; }
+  .card .content pre .number   { color: #c4792f; }
+  .card .content pre .function { color: #800000; }
+
+  .card hr {
+    border: none;
+    height: 3px;
+    background: var(--accent-alt);
+    margin: 28px 0;
+  }
+
+  .card footer {
+    margin-top: 32px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-strong);
+    font-size: 11px;
+    color: var(--secondary);
+  }
+  .card footer a { color: var(--secondary); text-decoration: none; }
+  .card footer a:hover { color: var(--rust); }
+
+  /* --- badge --- */
+  .card .badge {
+    font-size: 10px;
+    color: var(--accent-alt);
+    border: 1px solid var(--accent-alt);
+    padding: 1px 7px;
+    margin-right: 6px;
+  }
+
+  /* --- subtle detail --- */
+  .inline-highlight {
+    color: var(--rust);
+    border-bottom: 1px dotted var(--rust);
+    cursor: default;
+  }
+</style>
+</head>
+<body>
+
+<hgroup>
+  <h1>Five Pebbles · 墨绿 + 赭石 + 锈红</h1>
+  <p>两种分配方案：绿主导 vs 锈主导，看哪个节奏更对</p>
+  <div class="swatches">
+    <span><i style="background:#3d5a3c"></i> 墨绿</span>
+    <span><i style="background:#c4792f"></i> 赭石</span>
+    <span><i style="background:#c15b3d"></i> 锈红</span>
+  </div>
+</hgroup>
+
+<div class="layout">
+
+  <!-- ========== A: 绿主 · 赭辅 · 锈为锋 ========== -->
+  <div class="card" style="
+    --bg-page:     #e6e7e2;
+    --bg-content:  #f7f7f3;
+    --bg-code:     #f0f1ec;
+    --text:        #1a1a1a;
+    --secondary:   #6e7165;
+    --accent:      #3d5a3c;
+    --accent-alt:  #c4792f;
+    --rust:        #c15b3d;
+    --border-strong: #bcc0b3;
+    --code-border: #d8dacf;
+  ">
+    <div class="label">
+      <strong>方案 A</strong>
+      <span>绿作主色 → 链接 / 赭石 → 分割线与装饰 / 锈红 → hover 与强调</span>
+    </div>
+    <div class="card-inner">
+      <div class="nav">
+        <span class="home">Five Pebbles</span>
+        <span>迭代器 #04</span>
+      </div>
+
+      <ul class="list">
+        <li><span class="hex">0x81a9</span> Respectable people don't Litter <span class="date">06-09</span></li>
+        <li><span class="hex">0x23ed</span> Inertial Easing 的数学原理 <span class="date">05-22</span></li>
+        <li><span class="hex">0xd095</span> Fitting Code Driven Displacement <span class="date">04-15</span></li>
+      </ul>
+
+      <div class="content">
+        <h3><span class="badge">0x81a9</span>体面的人不扔垃圾</h3>
+        <div class="date">2026-06-09</div>
+
+        <p>我站在十字路口等红灯，旁边一个穿西装的商务男士伸手去包里掏东西，一盒<strong>薄荷糖</strong>掉了出来。大约三十颗白色小糖丸像弹珠一样滚满了马路。</p>
+
+        <blockquote>
+          <p>「其实乱扔垃圾是好事，不然那些靠捡垃圾为生的人就要失业了。」</p>
+        </blockquote>
+
+        <p>那句话让我的朋友爆笑——他站到了我这边，开始用这话逗他妈妈。我完全翻转了局势——朋友不再觉得我做了蠢事，而是觉得我做了<strong>聪明事</strong>。<a href="#">那是我第一次意识到</a>，为一些不真实的事情辩护，既可以很好玩，也可以让人印象深刻。</p>
+
+        <p>在这个八十亿人的星球上生活，最疯狂的事情之一就是：如果你有一个麻烦，在某些情况下你基本可以把这个麻烦像挥棒球棍一样甩进人群，让它砸在某个<span class="inline-highlight">倒霉路人</span>的头上。对你来说，麻烦等于消失了。对那个被砸中的人来说——麻烦像是<strong>凭空出现</strong>的。多有趣啊！</p>
+
+<pre><code><span class="comment">// Perlin noise 实现的 ASCII 字符动画</span>
+<span class="keyword">fn</span> <span class="function">animHash</span>(x: <span class="type">f32</span>) -> <span class="type">f32</span> {
+    ((<span class="function">sin</span>(x * <span class="number">91.3458</span>) * <span class="number">47453.5453</span>) % <span class="number">1.0</span> + <span class="number">1.0</span>) / <span class="number">2.0</span>
+}</code></pre>
+
+        <p>作为机器学习从业者，我喜欢把内心的那个小声音想象成<code>local gradient signal</code>。它工作的层面差不多就是：<a href="#">「我不喜欢街上满是垃圾」</a>「垃圾只有人丢了才存在」「我是人」「所以我不应该丢垃圾」。</p>
+
+        <hr>
+      </div>
+
+      <footer>
+        <a href="#">Five Pebbles</a> &nbsp;·&nbsp; <a href="#">RSS</a> &nbsp;·&nbsp; <a href="#">埋纸地</a>
+      </footer>
+    </div>
+  </div>
+
+  <!-- ========== B: 锈主 · 绿辅 · 赭为骨 ========== -->
+  <div class="card" style="
+    --bg-page:     #e8e5e3;
+    --bg-content:  #f9f7f4;
+    --bg-code:     #f2f0ed;
+    --text:        #1a1a1a;
+    --secondary:   #7a7068;
+    --accent:      #c15b3d;
+    --accent-alt:  #c4792f;
+    --rust:        #3d5a3c;
+    --border-strong: #c5bcb2;
+    --code-border: #ddd6cd;
+  ">
+    <div class="label">
+      <strong>方案 B</strong>
+      <span>锈红作主色 → 链接 / 赭石 → 分割线 / 墨绿 → hover 与点缀</span>
+    </div>
+    <div class="card-inner">
+      <div class="nav">
+        <span class="home">Five Pebbles</span>
+        <span>迭代器 #04</span>
+      </div>
+
+      <ul class="list">
+        <li><span class="hex">0x81a9</span> Respectable people don't Litter <span class="date">06-09</span></li>
+        <li><span class="hex">0x23ed</span> Inertial Easing 的数学原理 <span class="date">05-22</span></li>
+        <li><span class="hex">0xd095</span> Fitting Code Driven Displacement <span class="date">04-15</span></li>
+      </ul>
+
+      <div class="content">
+        <h3><span class="badge">0x81a9</span>体面的人不扔垃圾</h3>
+        <div class="date">2026-06-09</div>
+
+        <p>我站在十字路口等红灯，旁边一个穿西装的商务男士伸手去包里掏东西，一盒<strong>薄荷糖</strong>掉了出来。大约三十颗白色小糖丸像弹珠一样滚满了马路。</p>
+
+        <blockquote>
+          <p>「其实乱扔垃圾是好事，不然那些靠捡垃圾为生的人就要失业了。」</p>
+        </blockquote>
+
+        <p>那句话让我的朋友爆笑——他站到了我这边，开始用这话逗他妈妈。我完全翻转了局势——朋友不再觉得我做了蠢事，而是觉得我做了<strong>聪明事</strong>。<a href="#">那是我第一次意识到</a>，为一些不真实的事情辩护，既可以很好玩，也可以让人印象深刻。</p>
+
+        <p>在这个八十亿人的星球上生活，最疯狂的事情之一就是：如果你有一个麻烦，在某些情况下你基本可以把这个麻烦像挥棒球棍一样甩进人群，让它砸在某个<span class="inline-highlight">倒霉路人</span>的头上。对你来说，麻烦等于消失了。对那个被砸中的人来说——麻烦像是<strong>凭空出现</strong>的。多有趣啊！</p>
+
+<pre><code><span class="comment">// Perlin noise 实现的 ASCII 字符动画</span>
+<span class="keyword">fn</span> <span class="function">animHash</span>(x: <span class="type">f32</span>) -> <span class="type">f32</span> {
+    ((<span class="function">sin</span>(x * <span class="number">91.3458</span>) * <span class="number">47453.5453</span>) % <span class="number">1.0</span> + <span class="number">1.0</span>) / <span class="number">2.0</span>
+}</code></pre>
+
+        <p>作为机器学习从业者，我喜欢把内心的那个小声音想象成<code>local gradient signal</code>。它工作的层面差不多就是：<a href="#">「我不喜欢街上满是垃圾」</a>「垃圾只有人丢了才存在」「我是人」「所以我不应该丢垃圾」。</p>
+
+        <hr>
+      </div>
+
+      <footer>
+        <a href="#">Five Pebbles</a> &nbsp;·&nbsp; <a href="#">RSS</a> &nbsp;·&nbsp; <a href="#">埋纸地</a>
+      </footer>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

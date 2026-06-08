@@ -1,0 +1,57 @@
+---
+// 埋纸地文章布局 — A1 刻本
+export interface Props {
+  title: string;
+  date: Date;
+}
+const { title, date } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title} — 埋纸地</title>
+  <link rel="stylesheet" href="/styles/serif.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoLkbqXLCUZTRY7wEFsYAB0WkNFLK7T3uMYV5" crossorigin="anonymous" />
+  <script is:inline>
+    (function() {
+      const t = localStorage.getItem('theme');
+      if (t) { document.documentElement.setAttribute('data-theme', t); }
+    })();
+  </script>
+</head>
+<body>
+  <div class="page">
+    <nav class="nav">
+      <span>
+        <a href="/serif" class="home">埋纸地</a>
+        <button class="theme-toggle" onclick="
+          const el = document.documentElement;
+          const cur = el.getAttribute('data-theme');
+          const next = cur === 'dark' ? 'light' : 'dark';
+          el.setAttribute('data-theme', next);
+          localStorage.setItem('theme', next);
+        ">◐</button>
+      </span>
+      <a href="/fp">Five Pebbles</a>
+    </nav>
+
+    <article>
+      <header>
+        <h1>{title}</h1>
+        <div class="date">{date.toLocaleDateString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit' })}</div>
+      </header>
+
+      <div class="content">
+        <slot />
+      </div>
+    </article>
+
+    <footer>
+      <a href="/serif">埋纸地</a> &nbsp;·&nbsp; <a href="/fp">Five Pebbles</a> &nbsp;·&nbsp; <a href="/">首页</a>
+    </footer>
+  </div>
+</body>
+</html>
