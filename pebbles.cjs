@@ -16,57 +16,10 @@
 const fs = require('fs');
 const path = require('path');
 const { execSync, spawnSync } = require('child_process');
-const crypto = require('crypto');
+const { ROOT, POSTS_DIR, slugify, randomHex, todayStr, sectionLabel, dateToHex, readPosts } = require('./pebbles-utils.cjs');
+const { cmdBroadcast } = require('./pebbles-broadcast.cjs');
 
-const ROOT = __dirname;
-const POSTS_DIR = path.join(ROOT, 'src', 'content', 'posts');
 const DIST_DIR = path.join(ROOT, 'dist');
-
-// ============================================================
-//  utilities
-// ============================================================
-
-function slugify(text) {
-  return text
-    .toLowerCase()
-    .replace(/\s+/g, '-')
-    .replace(/[^\w一-鿿-]/g, '')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '')
-    .substring(0, 60);
-}
-
-function randomHex(len = 4) {
-  return crypto.randomBytes(len).toString('hex').substring(0, len);
-}
-
-function todayStr() {
-  return new Date().toISOString().split('T')[0];
-}
-
-function sectionLabel(s) {
-  return s === 'serif' ? '埋纸地' : 'Five Pebbles';
-}
-
-function readPosts() {
-  if (!fs.existsSync(POSTS_DIR)) return [];
-  return fs.readdirSync(POSTS_DIR)
-    .filter(f => f.endsWith('.md'))
-    .map(f => {
-      const filepath = path.join(POSTS_DIR, f);
-      const raw = fs.readFileSync(filepath, 'utf-8');
-      const fmMatch = raw.match(/^---\n([\s\S]*?)\n---/);
-      const meta = {};
-      if (fmMatch) {
-        fmMatch[1].split('\n').forEach(line => {
-          const m = line.match(/^(\w+):\s*(.+)$/);
-          if (m) meta[m[1]] = m[2].trim();
-        });
-      }
-      return { file: f, filepath, ...meta };
-    })
-    .sort((a, b) => (b.date || '').localeCompare(a.date || ''));
-}
 
 // ============================================================
 //  commands
@@ -102,21 +55,13 @@ function cmdNew(section, title) {
 title: ${title}
 date: ${date}
 section: ${section}
-`;
-  if (section === 'mono') {
-    fm += `hex: ${randomHex()}\n`;
-  }
-  fm += `---\n\n`;
+---\n\n`;
   fm += `> 发布于 ${sectionLabel(section)}\n\n`;
 
   fs.writeFileSync(filepath, fm, 'utf-8');
 
   console.log(`✓ 已创建  ${filename}`);
   console.log(`  栏目    ${sectionLabel(section)}`);
-  if (section === 'mono') {
-    const hm = fm.match(/hex: (\w+)/);
-    console.log(`  hex     0x${hm[1]}`);
-  }
   console.log(`  日期    ${date}`);
 }
 
@@ -146,8 +91,8 @@ function cmdList() {
     console.log('Five Pebbles');
     console.log('────────────');
     monoPosts.forEach(p => {
-      const hex = p.hex ? `0x${p.hex}` : '    ';
-      console.log(`  ${p.date}  ${hex}  ${p.title}`);
+      const hex = p.date ? dateToHex(p.date) : '    ';
+      console.log(`  ${p.date}  0x${hex}  ${p.title}`);
     });
     console.log('');
   }
@@ -264,6 +209,13 @@ function help() {
   pebbles preview              预览构建结果
   pebbles sync                 部署到 GitHub Pages
   pebbles delete [文件名]      删除文章（无参数时交互选择）
+  pebbles rm [文件名]          同上
+  pebbles broadcast add "邮箱"  添加邮件订阅者
+  pebbles broadcast remove "邮箱" 移除邮件订阅者
+  pebbles broadcast list        列出订阅者
+  pebbles broadcast dry-run     预览广播邮件（不发送）
+  pebbles broadcast             发送广播邮件
+  pebbles bc ...                同上（简写）
 `);
 }
 
@@ -289,6 +241,10 @@ switch (command) {
   case 'delete':
   case 'rm':
     cmdDelete(process.argv[3]);
+    break;
+  case 'broadcast':
+  case 'bc':
+    cmdBroadcast(process.argv[3], process.argv[4]);
     break;
   default:
     help();
